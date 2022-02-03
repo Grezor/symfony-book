@@ -8,10 +8,12 @@ use App\Entity\Conference;
 use App\Form\CommentFormType;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ConferenceController extends AbstractController
 {
@@ -52,7 +54,7 @@ class ConferenceController extends AbstractController
                 try {
                     $photo->move($photoDir, $filename);
                 } catch (FileException $e) {
-                    // unable to upload the photo, give up
+                    
                 }
                 $comment->setPhotoFilename($filename);
             }
